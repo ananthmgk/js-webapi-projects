@@ -12,7 +12,6 @@
             'https://nominatim.openstreetmap.org/reverse?format=json';
           const latitude = geoLocationPos.coords.latitude;
           const longitude = geoLocationPos.coords.longitude;
-          console.log(`${latitude}, ${longitude}`);
           fetch(`${locAPI}&lat=${latitude}&lon=${longitude}`)
             .then((response) => response.json())
             .then(
@@ -22,8 +21,8 @@
             .catch((err) => console.log(err));
         },
         (geoLocationPosError) => {
-          console.log(geoLocationPosError.message);
-        }
+                console.log(document.getElementById('loc').innerHTML = geoLocationPosError.message);
+            }
       );
     </script>
   </head>

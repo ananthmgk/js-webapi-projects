@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Cat Facts</title>
+    <style>
+        h1 {
+          margin-left: 10%;
+          font-style: italic;
+        }
+        button {
+          margin-top: 20px;
+          margin-left: 10%;
+        }
+      </style>
+    <script>
+      fetch('https://meowfacts.herokuapp.com/')
+        .then((response) => response.json())
+        .then(
+          (json) => (document.querySelector('#text').innerHTML = json.data)
+        )
+        .catch((err) => console.log(document.querySelector('#image h1').innerHTML = err.message));
+      
+      </script>
+  </head>
+  <body>
+    <div>
+      <h1 id="heading">Cat Facts</h1>
+      <span id="text"></span>
+    </div>
+    <div>
+        <button onClick="window.location.reload()">Next</button>
+    </div>
+  </body>
+</html>

@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Fox Images</title>
+    <style>
+        img {
+        max-width: 100%;
+      }
+        h1 {
+          margin-left: 10%;
+          font-style: italic;
+        }
+        button {
+          margin-top: 20px;
+          margin-left: 20%;
+        }
+      </style>
+    <script>
+      fetch('https://randomfox.ca/floof/')
+        .then((response) => response.json())
+        .then(
+          (json) => (document.querySelector('#image img').src = json.image)
+        )
+        .catch((err) => console.log(document.querySelector('#image h1').innerHTML = err.message));
+      
+      </script>
+  </head>
+  <body>
+    <div id="image">
+      <h1 id="heading">Fox Image</h1>
+      <img src="" alt="Fox Image">
+    </div>
+    <div>
+        <button onClick="window.location.reload()">Next</button>
+    </div>
+  </body>
+</html>

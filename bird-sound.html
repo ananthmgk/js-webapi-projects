@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Bird Sound</title>
+    <script>
+      
+        fetch('https://xeno-canto.org/api/2/recordings?query=cnt:brazil')
+        .then((response) => response.json())
+        .then(
+          (json) => (document.querySelector('#sound audio').src = json.recordings[1].file)
+        )
+        .catch((err) => console.log(document.querySelector('#sound h1').innerHTML = err.message));
+      
+      </script>
+  </head>
+  <body>
+    <div id="sound">
+      <h1 id="heading">Bird Sound</h1>
+      <audio controls>
+        <source src="">
+      </audio>
+    </div>
+  </body>
+</html>

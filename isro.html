@@ -4,7 +4,7 @@
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>isro spacecrafts</title>
+    <title>isro</title>
     <style>
         h1 {
           margin-left: 10%;
@@ -16,27 +16,36 @@
         }
       </style>
     <script>
-        let num = 0;
-        function next() {
-            num += 1;
-            if( num <= 111) {
-                fetch('https://isro.vercel.app/api/spacecrafts')
-                .then((response) => response.json())
-                .then((json) => (document.querySelector('#text').innerHTML = json.spacecrafts[`${num}`].name))
-                .catch((err) => console.log(document.querySelector('h1').innerHTML = err));
-            }
-        };
+      let num = 0;
+      function next() {
+          num += 1;
+          if( num <= 111) {
+            fetch('https://isro.vercel.app/api/spacecrafts')
+              .then((response) => response.json())
+              .then((json) => {
+                (document.querySelector('#text').innerHTML = json.spacecrafts[`${num}`].name);
+                (document.querySelector('#index').innerHTML = json.spacecrafts[`${num}`].id);
+              })
+              .catch((err) => console.log(document.querySelector('h1').innerHTML = err.message));
+          }  
+      };
 
       fetch('https://isro.vercel.app/api/spacecrafts')
         .then((response) => response.json())
-        .then((json) => (document.querySelector('#text').innerHTML = json.spacecrafts[0].name))
-        .catch((err) => console.log(document.querySelector('h1').innerHTML = err));
+        .then((json) => {
+          (document.querySelector('#text').innerHTML = json.spacecrafts[0].name);
+          (document.querySelector('#index').innerHTML = json.spacecrafts[0].id);
+        })
+        .catch((err) => console.log(document.querySelector('h1').innerHTML = err.message));
 
       </script>
   </head>
   <body>
     <div>
-      <h1 id="heading">ISRO Spacecrafts</h1>
+      <h1 id="heading">ISRO</h1>
+      <span>Number: </span>
+      <span id="index"></span><br>
+      <span>Name :</span>
       <span id="text"></span>
     </div>
     <div>

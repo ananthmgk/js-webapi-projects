@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>thirukkural</title>
+    <style>
+        h1 {
+          margin-left: 10%;
+          font-style: italic;
+        }
+        button {
+          margin-top: 20px;
+          margin-left: 10%;
+        }
+      </style>
+    <script>
+      const locApi = 'https://api-thirukkural.vercel.app/api';
+      let num = 1;
+      function nextKural() {
+        num += 1;
+        if( num <= 1330) {
+          fetch(`${locApi}?num=${num}`)
+        .then((response) => response.json())
+        .then((json) => {
+          (document.querySelector('#text1').innerHTML = json.line1);
+          (document.querySelector('#text2').innerHTML = json.line2);
+        })
+        .catch((err) => console.log(document.querySelector('h1').innerHTML = err.message));
+        }
+      }
+      
+        fetch(`${locApi}?num=${num}`)
+        .then((response) => response.json())
+        .then((json) => {
+          (document.querySelector('#text1').innerHTML = json.line1);
+          (document.querySelector('#text2').innerHTML = json.line2);
+        })
+        .catch((err) => console.log(document.querySelector('h1').innerHTML = err.message));
+
+      </script>
+  </head>
+  <body>
+    <div>
+      <h1 id="heading">Thirukkural</h1>
+      <span id="text1"></span><br>
+      <span id="text2"></span>
+    </div>
+    <div>
+        <button onClick="nextKural()">Next</button>
+    </div>
+  </body>
+</html>

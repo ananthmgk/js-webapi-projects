@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>isro spacecrafts</title>
+    <style>
+        h1 {
+          margin-left: 10%;
+          font-style: italic;
+        }
+        button {
+          margin-top: 20px;
+          margin-left: 10%;
+        }
+      </style>
+    <script>
+        let num = 0;
+        function next() {
+            num += 1;
+            if( num <= 111) {
+                fetch('https://isro.vercel.app/api/spacecrafts')
+                .then((response) => response.json())
+                .then((json) => (document.querySelector('#text').innerHTML = json.spacecrafts[`${num}`].name))
+                .catch((err) => console.log(document.querySelector('h1').innerHTML = err));
+            }
+        };
+
+      fetch('https://isro.vercel.app/api/spacecrafts')
+        .then((response) => response.json())
+        .then((json) => (document.querySelector('#text').innerHTML = json.spacecrafts[0].name))
+        .catch((err) => console.log(document.querySelector('h1').innerHTML = err));
+
+      </script>
+  </head>
+  <body>
+    <div>
+      <h1 id="heading">ISRO Spacecrafts</h1>
+      <span id="text"></span>
+    </div>
+    <div>
+        <button onClick="next()">Next</button>
+    </div>
+  </body>
+</html>

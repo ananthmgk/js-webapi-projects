@@ -4,33 +4,48 @@
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Emoji Symbols</title>
+    <title>Emoji Symbol</title>
     <style>
-        h1 {
-          margin-left: 10%;
-        }
-        button {
-          margin-top: 20px;
-          margin-left: 10%;
-        }
-      </style>
+      h2 {
+        margin-left: 10%;
+      }
+      h1 {
+        margin-left: 10%;
+      }
+      button {
+        margin-top: 20px;
+        margin-left: 10%;
+      }
+    </style>
     <script>
-      fetch('https://emojihub.herokuapp.com/api/random')
-        .then((response) => response.json())
-        .then(
-          (json) => (document.querySelector('#text').innerHTML = json.htmlCode[0])
-        )
-        .catch((err) => console.log(document.querySelector('h1').innerHTML = err.message));
-      
-      </script>
+      window.addEventListener("load", () => {
+        const nextBtn = document.getElementById("nxtbtn");
+        nextBtn.addEventListener("click", apiFetch);
+        function apiFetch() {
+          fetch("https://emojihub.herokuapp.com/api/random")
+            .then((response) => response.json())
+            .then((json) => {
+              document.querySelector("#symbol").innerHTML = json.htmlCode[0];
+              document.querySelector("#text").innerHTML = json.name;
+            })
+            .catch((err) =>
+              console.log(
+                (document.querySelector("h1").innerHTML = err.message)
+              )
+            );
+        }
+        apiFetch();
+      });
+    </script>
   </head>
   <body>
     <div>
-      <h1 id="heading">Emoji Symbols</h1>
-      <h1 id="text"></h1>
+      <h1 id="heading">Emoji Symbol</h1>
+      <h2 id="text"></h2>
+      <h1 id="symbol"></h1>
     </div>
     <div>
-        <button onClick="window.location.reload()">Next</button>
+      <button id="nxtbtn">Next</button>
     </div>
   </body>
 </html>

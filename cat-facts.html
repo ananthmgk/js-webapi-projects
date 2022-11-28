@@ -6,24 +6,34 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Cat Facts</title>
     <style>
-        h1 {
-          margin-left: 10%;
-          font-style: italic;
-        }
-        button {
-          margin-top: 20px;
-          margin-left: 10%;
-        }
-      </style>
+      h1 {
+        margin-left: 10%;
+        font-style: italic;
+      }
+      button {
+        margin-top: 20px;
+        margin-left: 10%;
+      }
+    </style>
     <script>
-      fetch('https://meowfacts.herokuapp.com/')
-        .then((response) => response.json())
-        .then(
-          (json) => (document.querySelector('#text').innerHTML = json.data)
-        )
-        .catch((err) => console.log(document.querySelector('h1').innerHTML = err.message));
-      
-      </script>
+      window.addEventListener("load", () => {
+        const nextBtn = document.getElementById("nxtbtn");
+        nextBtn.addEventListener("click", apiFetch);
+        function apiFetch() {
+          fetch("https://meowfacts.herokuapp.com/")
+            .then((response) => response.json())
+            .then(
+              (json) => (document.querySelector("#text").innerHTML = json.data)
+            )
+            .catch((err) =>
+              console.log(
+                (document.querySelector("h1").innerHTML = err.message)
+              )
+            );
+        }
+        apiFetch();
+      });
+    </script>
   </head>
   <body>
     <div>
@@ -31,7 +41,7 @@
       <span id="text"></span>
     </div>
     <div>
-        <button onClick="window.location.reload()">Next</button>
+      <button id="nxtbtn">Next</button>
     </div>
   </body>
 </html>

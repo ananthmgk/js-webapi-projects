@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>isro</title>
+    <style>
+      h1 {
+        margin-left: 10%;
+        font-style: italic;
+      }
+      button {
+        margin-top: 20px;
+        margin-left: 10%;
+      }
+    </style>
+    <script>
+      window.addEventListener("load", () => {
+        const previousBtn = document.getElementById("prvsbtn");
+        const nextBtn = document.getElementById("nxtbtn");
+        let num = 0;
+        previousBtn.addEventListener("click", previous);
+        nextBtn.addEventListener("click", next);
+        function apiFetch() {
+          fetch("https://isro.vercel.app/api/spacecrafts")
+            .then((response) => response.json())
+            .then((json) => {
+              document.querySelector("#text").innerHTML =
+                json.spacecrafts[`${num}`].name;
+              document.querySelector("#index").innerHTML =
+                json.spacecrafts[`${num}`].id;
+            })
+            .catch((err) =>
+              console.log(
+                (document.querySelector("h1").innerHTML = err.message)
+              )
+            );
+        }
+        function next() {
+          num += 1;
+          if (num <= 111) {
+            apiFetch();
+          }
+        }
+        function previous() {
+          num -= 1;
+          if (num >= 0) {
+            apiFetch();
+          }
+        }
+
+        apiFetch();
+      });
+    </script>
+  </head>
+  <body>
+    <div>
+      <h1 id="heading">ISRO</h1>
+      <span>No. : </span>
+      <span id="index"></span><br />
+      <span>Name :</span>
+      <span id="text"></span>
+    </div>
+    <div>
+      <button id="prvsbtn">Previous</button>
+      <button id="nxtbtn">Next</button>
+    </div>
+  </body>
+</html>

@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Bird Sound</title>
+    <style>
+      h1 {
+        margin-left: 10%;
+        font-style: italic;
+      }
+      button {
+        margin-top: 20px;
+        margin-left: 10%;
+      }
+    </style>
+    <script>
+      window.addEventListener("load", () => {
+        const previousBtn = document.getElementById("prvsbtn");
+        const nextBtn = document.getElementById("nxtbtn");
+        let num = 0;
+        previousBtn.addEventListener("click", previous);
+        nextBtn.addEventListener("click", next);
+        function apiFetch() {
+          fetch("https://xeno-canto.org/api/2/recordings?query=cnt:brazil")
+            .then((response) => response.json())
+            .then(
+              (json) =>
+                (document.querySelector("#sound audio").src =
+                  json.recordings[`${num}`].file)
+            )
+            .catch((err) =>
+              console.log(
+                (document.querySelector("#sound h1").innerHTML = err.message)
+              )
+            );
+        }
+        function next() {
+          num += 1;
+          if (num <= 499) {
+            apiFetch();
+          }
+        }
+        function previous() {
+          num -= 1;
+          if (num >= 0) {
+            apiFetch();
+          }
+        }
+
+        apiFetch();
+      });
+    </script>
+  </head>
+  <body>
+    <div id="sound">
+      <h1 id="heading">Bird Sound</h1>
+      <audio controls>
+        <source src="" />
+      </audio>
+    </div>
+    <div>
+      <button id="prvsbtn">Previous</button>
+      <button id="nxtbtn">Next</button>
+    </div>
+  </body>
+</html>
